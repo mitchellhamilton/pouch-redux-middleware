@@ -27,7 +27,7 @@ describe('Pouch Redux Middleware', function() {
 
   it('can be created', function(done) {
     pouchMiddleware = PouchMiddleware({
-      path: '/todos',
+      path: 'todos',
       db: db,
       actions: {
         remove: (doc) => { return {type: actionTypes.DELETE_TODO, id: doc._id} },
@@ -164,7 +164,7 @@ describe('Pouch Redux Middleware', function() {
 
   it('calles initialBatchDispatched', (done) => {
     const anotherMiddleware = PouchMiddleware({
-      path: '/todos',
+      path: 'todos',
       db: db,
       actions: {
         remove: (doc) => { return {type: actionTypes.DELETE_TODO, id: doc._id} },

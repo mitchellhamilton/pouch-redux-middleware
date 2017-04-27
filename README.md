@@ -37,7 +37,7 @@ export default function configureStore() {
   const db = new PouchDB('todos');
 
   const pouchMiddleware = PouchMiddleware({
-    path: '/todos',
+    path: 'todos',
     db,
     actions: {
       remove: doc => { return { type: types.DELETE_TODO, id: doc._id } },
@@ -64,7 +64,7 @@ export default function configureStore() {
 
 A path spec is an object describing the behaviour of a sub-tree of the state it has the following attributes:
 
-* `path`: a JsonPath path where the documents will stored in the state as an array
+* `path`: a property where the documents will stored in the state as an array
 * `db`: a PouchDB database
 * `actions`: an object describing the actions to perform when a change occurs in the db.
 It's an object with keys containing a function that returns an action for each
@@ -88,7 +88,7 @@ Example of a path spec:
 
 ```js
 {
-  path: '/todos',
+  path: 'todos',
   db,
   actions: {
     remove: doc => { return { type: types.DELETE_TODO, id: doc._id } },

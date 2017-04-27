@@ -1,4 +1,3 @@
-var jPath = require('json-path');
 var Queue = require('async-function-queue');
 var extend = require('xtend');
 var equal = require('deep-equal');
@@ -16,7 +15,7 @@ function createPouchMiddleware(_paths) {
   }
 
   var defaultSpec = {
-    path: '.',
+    path: '',
     remove: scheduleRemove,
     insert: scheduleInsert,
     propagateDelete,
@@ -63,7 +62,7 @@ function createPouchMiddleware(_paths) {
   }
 
   function processNewStateForPath(path, state) {
-    var docs = jPath.resolve(state, path.path);
+    var docs = [state[path.path]]
 
     /* istanbul ignore else */
     if (docs && docs.length) {
