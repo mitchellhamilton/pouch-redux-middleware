@@ -51,7 +51,7 @@ function createPouchMiddleware(_paths) {
       if (path.changeFilter) {
         filteredAllDocs = allDocs.filter(path.changeFilter);
       }
-      allDocs.forEach((doc) => {
+      filteredAllDocs.forEach((doc) => {
         path.docs[doc._id] = doc;
       });
       path.propagateBatchInsert(filteredAllDocs, dispatch);
@@ -64,7 +64,7 @@ function createPouchMiddleware(_paths) {
       changes.on('change', change => {
         onDbChange(path, change, dispatch);
       });
-    });
+    }).catch((err) => initialBatchDispatched(err));
   }
 
   function processNewStateForPath(path, state) {
